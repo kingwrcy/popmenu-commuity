@@ -73,6 +73,13 @@
   </div>
   <script>
     const apiUrl = "https://60s.viki.moe/v2/60s";
+    const params = new URLSearchParams(window.location.search);
+    const width = params.get('width')
+    const height = params.get('height')
+    if (!width && !height && window.setWidthAndHeight) {
+      window.setWidthAndHeight(400, 600);
+    }
+
     async function fetchNews() {
       try {
         const res = await fetch(apiUrl, { cache: "no-store" });

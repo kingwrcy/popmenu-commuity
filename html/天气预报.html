@@ -114,7 +114,11 @@
     <div class="notice" id="notice"></div>
   </div>
   <script>
-    setWidthAndHeight(400, 300)
+    const width = params.get('width')
+    const height = params.get('height')
+    if (!width && !height && window.setWidthAndHeight) {
+      window.setWidthAndHeight(400, 300);
+    }
     const cityMap = {
       "北京": "101010100",
       "上海": "101020100",

@@ -170,6 +170,13 @@
   </div>
 
   <script>
+
+    const width = params.get('width')
+    const height = params.get('height')
+    if (!width && !height && window.setWidthAndHeight) {
+      window.setWidthAndHeight(500, 200);
+    }
+
     class HitokotoDisplay {
       constructor() {
         const params = new URLSearchParams(window.location.search);
