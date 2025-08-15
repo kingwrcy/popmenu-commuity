@@ -276,15 +276,6 @@
     document.addEventListener('DOMContentLoaded', () => {
       new HitokotoDisplay();
     });
-
-    // 添加键盘快捷键支持
-    document.addEventListener('keydown', (e) => {
-      if (e.key === ' ' || e.key === 'Enter') {
-        e.preventDefault();
-        // 手动刷新
-        window.location.reload();
-      }
-    });
   </script>
 </body>
 

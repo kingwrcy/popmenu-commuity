@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+  <meta charset="UTF-8">
+  <title>价格浮窗</title>
+  <style>
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      background: #000;
+      font-size: 16px;
+      cursor: default;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #price {
+      font-size: .9rem;
+      font-weight: bold;
+      color: #fff;
+      opacity: 0.7;
+      transition: color 0.3s;
+      text-shadow: 0 0 2px #222;
+    }
+
+    #time {
+      font-size: .8rem;
+      color: #fff;
+      opacity: 0.5;
+      text-shadow: 0 0 2px #222;
+      margin-top: 4px;
+    }
+
+    #dollars {
+      color: #fff;
+      opacity: 0.6;
+      text-shadow: 0 0 2px #222;
+      font-size: .8rem;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="price">--</div>
+  <div id="time">--:--</div>
+  <script>
+
+    const API_URL = 'https://api.dexscreener.com/tokens/v1/solana/9raUVuzeWUk53co63M4WXLWPWE4Xc6Lpn7RS9dnkpump';
+    const priceEl = document.getElementById('price');
+    const timeEl = document.getElementById('time');
+    let lastPrice = null;
+    async function update() {
+      try {
+        const res = await fetch(API_URL);
+        const data = await res.json();
+        const price = parseFloat(data[0].priceUsd);
+
+        if (lastPrice !== null) {
+          if (price > lastPrice) {
+            priceEl.style.color = '#00ff6a';
+          } else if (price < lastPrice) {
+            priceEl.style.color = '#ff3b3b';
+          } else {
+            priceEl.style.color = '#fff';
+          }
+        }
+        priceEl.textContent = '$' + price.toFixed(5);
+        lastPrice = price;
+        const now = new Date();
+        const h = now.getHours().toString().padStart(2, '0');
+        const m = now.getMinutes().toString().padStart(2, '0');
+        timeEl.textContent = `${h}:${m}`;
+      } catch (e) {
+        priceEl.textContent = '--';
+        timeEl.textContent = '网络错误';
+        priceEl.style.color = '#fff';
+      }
+    }
+    update();
+    setInterval(update, 60 * 1000);
+  </script>
+</body>
+
+</html>

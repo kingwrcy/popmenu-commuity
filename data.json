@@ -6,7 +6,7 @@
       "author": "JerryWang",
       "size": {
         "width": 500,
-        "height": 500
+        "height": 100
       },
       "params": {
         "category": {
@@ -24,6 +24,39 @@
         "interval": {
           "default": 60,
           "desc": "刷新的间隔,单位秒"
+        }
+      }
+    },
+    {
+      "name": "每日60秒新闻",
+      "desc": "【日更】每天 60 秒读懂世界",
+      "author": "JerryWang",
+      "size": {
+        "width": 400,
+        "height": 600
+      }
+    },
+    {
+      "name": "v2ex币价",
+      "desc": "v2ex社区发币了,实时查看币价...买定离手.",
+      "author": "JerryWang",
+      "size": {
+        "width": 100,
+        "height": 100
+      }
+    },
+    {
+      "name": "天气预报",
+      "desc": "默认显示上海的天气预报,可以自由指定城市",
+      "author": "JerryWang",
+      "size": {
+        "width": 400,
+        "height": 320
+      },
+      "params": {
+        "city": {
+          "default": "上海",
+          "desc": "城市名称"
         }
       }
     }

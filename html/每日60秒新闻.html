@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>60秒新闻</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: #fafbfc;
+      font-family: "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      color: #222;
+
+    }
+
+    .main {
+      max-width: 600px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+      padding: 24px 16px;
+    }
+
+    .date {
+      font-size: 1.1em;
+      color: #888;
+      margin-bottom: 18px;
+      text-align: center;
+    }
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    li {
+      padding: 10px 0;
+      border-bottom: 1px solid #f0f0f0;
+      font-size: 1em;
+      line-height: 1.6;
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 700px) {
+      .main {
+
+        padding: 12px 4px;
+      }
+
+      .date {
+        font-size: 1em;
+      }
+
+      li {
+        font-size: 0.98em;
+        padding: 8px 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="main">
+    <div class="date" id="date"></div>
+    <ul id="news"></ul>
+  </div>
+  <script>
+    const apiUrl = "https://60s.viki.moe/v2/60s";
+    async function fetchNews() {
+      try {
+        const res = await fetch(apiUrl, { cache: "no-store" });
+        const json = await res.json();
+        if (json.code !== 200) throw new Error(json.message || "API错误");
+        const data = json.data;
+        document.getElementById('date').innerText = data.date || '';
+        const newsList = document.getElementById('news');
+        newsList.innerHTML = '';
+        (data.news || []).forEach(item => {
+          const li = document.createElement('li');
+          li.textContent = item;
+          newsList.appendChild(li);
+        });
+      } catch (e) {
+        document.getElementById('news').innerHTML = `<li style="color:red;">加载失败：${e.message}</li>`;
+      }
+    }
+    // 每天10点自动刷新
+    function scheduleDailyRefresh(hour = 10, minute = 0) {
+      function getNextRefreshDelay() {
+        const now = new Date();
+        const next = new Date();
+        next.setHours(hour, minute, 0, 0);
+        if (now >= next) next.setDate(next.getDate() + 1);
+        return next - now;
+      }
+      setTimeout(() => {
+        fetchNews();
+        scheduleDailyRefresh(hour, minute);
+      }, getNextRefreshDelay());
+    }
+    fetchNews();
+    scheduleDailyRefresh(10, 0);
+  </script>
+</body>
+
+</html>
