@@ -6,7 +6,7 @@
   <title>城市天气</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- 阿里天气图标库 -->
-  <link rel="stylesheet" href="https://at.alicdn.com/t/c/font_3791062_2w7k1v7k6k.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/qweather-icons@1.8.0/font/qweather-icons.css">
   <style>
     html,
     body {
@@ -114,10 +114,11 @@
     <div class="notice" id="notice"></div>
   </div>
   <script>
+    const params = new URLSearchParams(window.location.search);
     const width = params.get('width')
     const height = params.get('height')
     if (!width && !height && window.setWidthAndHeight) {
-      window.setWidthAndHeight(400, 300);
+      window.setWidthAndHeight(400, 600);
     }
     const cityMap = {
       "北京": "101010100",
@@ -2654,7 +2655,6 @@
       return "icon-duoyun";
     }
     function getQueryCity() {
-      const params = new URLSearchParams(location.search);
       return params.get('city') || '上海';
     }
 

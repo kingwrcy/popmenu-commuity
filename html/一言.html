@@ -171,15 +171,15 @@
 
   <script>
 
+    const params = new URLSearchParams(window.location.search);
     const width = params.get('width')
     const height = params.get('height')
     if (!width && !height && window.setWidthAndHeight) {
-      window.setWidthAndHeight(500, 200);
+      window.setWidthAndHeight(400, 600);
     }
 
     class HitokotoDisplay {
       constructor() {
-        const params = new URLSearchParams(window.location.search);
         this.interval = params.get('interval') || 60
         this.category = params.get('category') || 'c'
         this.min_length = params.get('min_length') || '0'

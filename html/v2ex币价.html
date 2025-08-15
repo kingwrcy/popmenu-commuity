@@ -54,10 +54,11 @@
   <div id="price">--</div>
   <div id="time">--:--</div>
   <script>
+    const params = new URLSearchParams(window.location.search);
     const width = params.get('width')
     const height = params.get('height')
     if (!width && !height && window.setWidthAndHeight) {
-      window.setWidthAndHeight(100, 100);
+      window.setWidthAndHeight(400, 600);
     }
     const API_URL = 'https://api.dexscreener.com/tokens/v1/solana/9raUVuzeWUk53co63M4WXLWPWE4Xc6Lpn7RS9dnkpump';
     const priceEl = document.getElementById('price');
