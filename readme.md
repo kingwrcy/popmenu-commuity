@@ -1,6 +1,6 @@
 ### popmenu 社区自定义浮窗
 
-操作步骤如下:
+共享浮窗步骤如下:
 
 1. fork 本仓库.
 2. 修改`data.json` 添加你的浮窗信息.
@@ -9,9 +9,15 @@
 
 ### 说明
 
-程序中可以使用参数,最好不要超过 4 个参数.嵌入的参数是通过`url query`的方式传入的,所以可以使用`const params = new URLSearchParams(window.location.search);`这样来获取参数.
+程序中可以使用参数,最好不要超过 4 个参数.嵌入的参数是通过`url query`的方式传入的,所以可以使用
 
-最好加上默认值,这样不管是不是在 popmenu 里打开,都可以正常显示.
+```javascript
+const params = new URLSearchParams(window.location.search);
+```
+
+这样来获取参数.
+
+最好加上默认值,这样不管是不是在 `popmenu` 里打开,都可以正常显示.
 
 ### 参数解释
 
