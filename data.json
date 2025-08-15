@@ -1,0 +1,31 @@
+{
+  "list": [
+    {
+      "name": "一言",
+      "desc": "一言 - 触动心灵的句子",
+      "author": "JerryWang",
+      "size": {
+        "width": 500,
+        "height": 500
+      },
+      "params": {
+        "category": {
+          "default": "c",
+          "desc": "句子类型"
+        },
+        "min_length": {
+          "default": 0,
+          "desc": "返回句子的最小长度（包含）"
+        },
+        "max_length": {
+          "default": 30,
+          "desc": "返回句子的最大长度（包含）"
+        },
+        "interval": {
+          "default": 60,
+          "desc": "刷新的间隔,单位秒"
+        }
+      }
+    }
+  ]
+}
